@@ -1,0 +1,12 @@
+{
+  "polkadot": {
+    "usd": 11.55,
+    "usd_market_cap": 11680623594.901758,
+    "usd_24h_vol": 537821544.030412,
+    "usd_24h_change": -9.42491022906792,
+    "last_updated_at": 1626701249
+  },
+  "solana": {
+    "usd": 24.56
+  }
+}
