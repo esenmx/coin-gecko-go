@@ -24,11 +24,12 @@ func TestClient_SupportedVsCurrencies(t *testing.T) {
 func TestClient_SimplePrice(t *testing.T) {
 	res, err := client.SimplePrice(SimplePriceParams{Ids: []ID{"polkadot", "solana", "chainlink", "kusama"}})
 	assert.NoError(t, err)
-	assert.Equal(t, 4, len(res))
-	assert.NotNil(t, res["polkadot"])
-	assert.NotNil(t, res["solana"])
-	assert.NotNil(t, res["chainlink"])
-	assert.NotNil(t, res["kusama"])
+	assert.Equal(t, 4, len(res.Prices))
+	assert.Equal(t, 4, len(res.vsCurrencies))
+	assert.NotNil(t, res.Prices["polkadot"])
+	assert.NotNil(t, res.Prices["solana"])
+	assert.NotNil(t, res.Prices["chainlink"])
+	assert.NotNil(t, res.Prices["kusama"])
 }
 
 func TestClient_Coins(t *testing.T) {

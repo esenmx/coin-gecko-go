@@ -11,12 +11,22 @@ import (
 
 func TestSimplePrices(t *testing.T) {
 	var sps SimplePrices
+	sps.vsCurrencies = []Currency{"usd", "aud"}
 	err := unmarshalModel("simple_price", &sps)
 	assert.NoError(t, err)
-	assert.Equal(t, 2, len(sps))
-	assert.Equal(t, -9.42491022906792, *sps["polkadot"].Usd24HChange)
-	assert.Equal(t, 24.56, sps["solana"].Usd)
-	assert.Nil(t, sps["solana"].Usd24HVol)
+	assert.Equal(t, 2, len(sps.Prices))
+	assert.Equal(t, 12.2, sps.Prices["polkadot"].CurrencyPrice["usd"].Price)
+	assert.Equal(t, 16.59, sps.Prices["polkadot"].CurrencyPrice["aud"].Price)
+	assert.Equal(t, 12307700548.971405, *sps.Prices["polkadot"].CurrencyPrice["usd"].MarketCap)
+	assert.Equal(t, 16723457351.931345, *sps.Prices["polkadot"].CurrencyPrice["aud"].MarketCap)
+	assert.Equal(t, 911849298.6238484, *sps.Prices["polkadot"].CurrencyPrice["usd"].Vol24h)
+	assert.Equal(t, 1239366417.8542655, *sps.Prices["polkadot"].CurrencyPrice["aud"].Vol24h)
+	assert.Equal(t, 9.111769973736187, *sps.Prices["polkadot"].CurrencyPrice["usd"].Change24h)
+	assert.Equal(t, 8.739671660788401, *sps.Prices["polkadot"].CurrencyPrice["aud"].Change24h)
+	assert.Equal(t, 25.63, sps.Prices["solana"].CurrencyPrice["usd"].Price)
+	assert.Equal(t, 34.84, sps.Prices["solana"].CurrencyPrice["aud"].Price)
+	assert.Nil(t, sps.Prices["solana"].CurrencyPrice["usd"].Vol24h)
+	assert.Nil(t, sps.Prices["solana"].CurrencyPrice["aud"].Vol24h)
 }
 
 func TestMarkets(t *testing.T) {

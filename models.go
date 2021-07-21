@@ -2,6 +2,7 @@ package gocko
 
 import (
 	"encoding/json"
+	"fmt"
 	"time"
 )
 
@@ -31,14 +32,54 @@ type Supply struct {
 }
 
 type Price struct {
-	Usd           float64  `json:"usd"`
-	UsdMarketCap  *float64 `json:"usd_market_cap"`
-	Usd24HVol     *float64 `json:"usd_24h_vol"`
-	Usd24HChange  *float64 `json:"usd_24h_change"`
-	LastUpdatedAt *int64   `json:"last_updated_at"`
+	Price     float64
+	MarketCap *float64
+	Vol24h    *float64
+	Change24h *float64
 }
 
-type SimplePrices map[ID]Price
+type SimplePrice struct {
+	CurrencyPrice map[Currency]Price
+	LastUpdatedAt *int64
+}
+
+type SimplePrices struct {
+	vsCurrencies []Currency
+	Prices       map[ID]SimplePrice
+}
+
+func (r *SimplePrices) UnmarshalJSON(bs []byte) error {
+	if len(r.vsCurrencies) == 0 {
+		return MissingParameterError
+	}
+	var data map[string]map[string]float64
+	err := json.Unmarshal(bs, &data)
+	if err != nil {
+		return err
+	}
+	r.Prices = make(map[ID]SimplePrice, len(data))
+	for k, v := range data {
+		lu := int64(v["last_updated_at"])
+		ps := SimplePrice{LastUpdatedAt: &lu, CurrencyPrice: make(map[Currency]Price, len(r.vsCurrencies))}
+		for _, vsc := range r.vsCurrencies {
+			parser := func(k string) *float64 {
+				if p, ok := v[fmt.Sprintf("%s_%s", vsc, k)]; ok {
+					return &p
+				}
+				return nil
+			}
+			price := v[string(vsc)]
+			ps.CurrencyPrice[vsc] = Price{
+				Price:     price,
+				MarketCap: parser("market_cap"),
+				Vol24h:    parser("24h_vol"),
+				Change24h: parser("24h_change"),
+			}
+		}
+		r.Prices[ID(k)] = ps
+	}
+	return nil
+}
 
 type StatusUpdate struct {
 	Description string    `json:"description"`
@@ -159,12 +200,12 @@ type Market struct {
 }
 
 type Charts struct {
-	Prices       [][]float64 `json:"prices"`
-	MarketCaps   [][]float64 `json:"market_caps"`
-	TotalVolumes [][]float64 `json:"total_volumes"`
+	Prices       [][2]float64 `json:"prices"`
+	MarketCaps   [][2]float64 `json:"market_caps"`
+	TotalVolumes [][2]float64 `json:"total_volumes"`
 }
 
-type OHLC [][]float64
+type OHLC [][5]float64
 
 type ExchangeList []struct {
 	Id   EID    `json:"id"`

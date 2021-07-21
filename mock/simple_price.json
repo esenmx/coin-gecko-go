@@ -1,12 +1,18 @@
 {
   "polkadot": {
-    "usd": 11.55,
-    "usd_market_cap": 11680623594.901758,
-    "usd_24h_vol": 537821544.030412,
-    "usd_24h_change": -9.42491022906792,
-    "last_updated_at": 1626701249
+    "usd": 12.2,
+    "usd_market_cap": 12307700548.971405,
+    "usd_24h_vol": 911849298.6238484,
+    "usd_24h_change": 9.111769973736187,
+    "aud": 16.59,
+    "aud_market_cap": 16723457351.931345,
+    "aud_24h_vol": 1239366417.8542655,
+    "aud_24h_change": 8.739671660788401,
+    "last_updated_at": 1626898796
   },
   "solana": {
-    "usd": 24.56
+    "usd": 25.63,
+    "aud": 34.84,
+    "last_updated_at": 1626898828
   }
 }

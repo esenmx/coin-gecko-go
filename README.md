@@ -11,26 +11,21 @@ implement only the requests I need for my apps, but you can open `issue` for un-
 - Messy payloads simplified, fields omitted from payloads(see also `/coins/{id}`)
 - Critical fields will have custom types(see also `ID`, `Currency` types)
 - `Nullable` fields have pointer types
-- `VsCurrency` partially supported, `Localization` is not supported
+- `Localization` is not supported
 
-## Request Tracker:
+## Progress Tracker
 
-Ping
-----
+### Ping
 
-- [X] ping
+- [X] ping Simple
 
-----
-Simple
-----
+### Simple
 
 - [X] simple/price
 - [ ] simple/token_price/{id}
 - [X] simple/supported_vs_currencies
 
-----
-Coins
-----
+### Coins
 
 - [X] coins/list
 - [X] coins/markets
@@ -42,30 +37,22 @@ Coins
 - [ ] coins/{id}/status_updates
 - [X] coins/{id}/ohlc
 
-----
-Contract
-----
+### Contract
 
 - [ ] coins/{id}/contract/{contract_address}
 - [ ] coins/{id}/contract/{contract_address}/market_chart/
 - [ ] coins/{id}/contract/{contract_address}/market_chart/range
 
-----
-Asset Platforms
-----
+### Asset Platforms
 
 - [ ] asset_platforms
 
-----
-Categories
-----
+### Categories
 
 - [ ] coins/categories/list
 - [ ] coins/categories
 
-----
-Exchanges
-----
+### Exchanges
 
 - [X] exchanges
 - [X] exchanges/list
@@ -74,67 +61,47 @@ Exchanges
 - [ ] exchanges/{id}/status_updates
 - [ ] exchanges/{id}/volume_chart
 
-----
-Finance
-----
+### Finance
 
 - [ ] finance_platforms
 - [ ] finance_products
 
-----
-Indexes
-----
+### Indexes
 
 - [ ] indexes
 - [ ] indexes/{market_id}/{id}
 - [ ] indexes/list
 
-----
-Derivatives
-----
+### Derivatives
 
 - [ ] derivatives
 - [ ] derivatives/exchanges
 - [ ] derivatives/exchanges/{id}
 - [ ] derivatives/exchanges/list
 
-----
-Status Updates
-----
+### Status Updates
 
 - [ ] status_updates
 
-----
-Events
-----
+### Events
 
 - [ ] events
 - [ ] events/countries
 - [ ] events/types
 
-----
-Exchange Trades
-----
+### Exchange Trades
 
 - [ ] exchange_rates
 
-----
-Trending
-----
+### Trending
 
 - [ ] search/trending
 
-----
-Global
-----
+### Global
 
 - [ ] global
 - [ ] global/decentralized_finance_defi
 
-----
-Companies
-----
+### Companies
 
 - [ ] companies/public_treasury/{coin_id}
-
-----

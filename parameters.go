@@ -23,8 +23,8 @@ func (c CoinsParams) toQuery() (map[string]string, error) {
 }
 
 type SimplePriceParams struct {
-	Ids []ID // required
-	//VsCurrencies         []Currency // required
+	Ids                  []ID       // required
+	VsCurrencies         []Currency // required
 	IncludeMarketCap     bool
 	Include24hrVol       bool
 	Include24hrChange    bool
@@ -36,9 +36,8 @@ func (p SimplePriceParams) toQuery() (map[string]string, error) {
 		return nil, MissingParameterError
 	}
 	return map[string]string{
-		"ids": strings.Join(*(*[]string)(unsafe.Pointer(&p.Ids)), ","),
-		//"vs_currencies":           strings.Join(*(*[]string)(unsafe.Pointer(&p.VsCurrencies)), ","),
-		"vs_currencies":           "usd",
+		"ids":                     strings.Join(*(*[]string)(unsafe.Pointer(&p.Ids)), ","),
+		"vs_currencies":           strings.Join(*(*[]string)(unsafe.Pointer(&p.VsCurrencies)), ","),
 		"include_market_cap":      strconv.FormatBool(p.IncludeMarketCap),
 		"include_24hr_vol":        strconv.FormatBool(p.Include24hrVol),
 		"include_24hr_change":     strconv.FormatBool(p.Include24hrChange),

@@ -19,7 +19,7 @@ func (c *Client) SimpleSupportedVsCurrencies() ([]Currency, error) {
 }
 
 func (c *Client) SimplePrice(p SimplePriceParams) (SimplePrices, error) {
-	var sps SimplePrices
+	sps := SimplePrices{vsCurrencies: p.VsCurrencies}
 	err := c.do(fmt.Sprintf("%s/simple/price", baseURL), p, &sps)
 	return sps, err
 }
