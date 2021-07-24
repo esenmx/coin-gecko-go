@@ -32,7 +32,7 @@ type SimplePriceParams struct {
 }
 
 func (p SimplePriceParams) toQuery() (map[string]string, error) {
-	if len(p.Ids) == 0 {
+	if len(p.Ids) == 0 || len(p.VsCurrencies) == 0 {
 		return nil, MissingParameterError
 	}
 	return map[string]string{
@@ -61,7 +61,7 @@ func (c CoinsMarketsParams) toQuery() (map[string]string, error) {
 	if len(c.VsCurrency) == 0 {
 		return nil, MissingParameterError
 	}
-	if c.Page < 0 || c.PerPage < 0 || c.PerPage > 250 {
+	if c.Page < 0 || c.PerPage < 0 {
 		return nil, InvalidParameterError
 	}
 	q := map[string]string{}
@@ -152,7 +152,7 @@ type ExchangesParams struct {
 }
 
 func (e ExchangesParams) toQuery() (map[string]string, error) {
-	if e.PerPage > 250 || e.PerPage < 0 || e.Page < 0 {
+	if e.PerPage < 0 || e.Page < 0 {
 		return nil, InvalidParameterError
 	}
 	return map[string]string{"per_page": strconv.Itoa(e.PerPage), "page": strconv.Itoa(e.Page)}, nil

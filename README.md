@@ -1,15 +1,14 @@
-# Gocko (A [CoinGecko](https://coingecko.com/) Client)
+# Gocko (Golang Client for [CoinGecko](https://coingecko.com/))
 
 I create this package for my personal projects, and it aims to be simple and extensible with minor tweaks. I'll
-implement only the requests I need for my apps, but you can open `issue` for un-implemented requests also!
+implement only the requests I need for my apps, but you can open `issue` for un-implemented methods also!
 
 ### Notes:
 
 - Dependency-Free
-- Requests with possible big payloads will return pointer
 - Required parameters handled before the requests
-- Messy payloads simplified, fields omitted from payloads(see also `/coins/{id}`)
-- Critical fields will have custom types(see also `ID`, `Currency` types)
+- Messy payloads simplified, not well organized fields omitted(see also `/coins/{id}`), open `issue` for your needs
+- Critical fields will have custom types(see also `ID`, `Currency`)
 - `Nullable` fields have pointer types
 - `Localization` is not supported
 
