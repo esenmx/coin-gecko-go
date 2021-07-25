@@ -8,7 +8,6 @@ implement only the requests I need for my apps, but you can open `issue` for un-
 - Dependency-Free
 - Required parameters handled before the requests
 - Messy payloads simplified, not well organized fields omitted(see also `/coins/{id}`), open `issue` for your needs
-- Critical fields will have custom types(see also `ID`, `Currency`)
 - `Nullable` fields have pointer types
 - `Localization` is not supported
 

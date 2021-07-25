@@ -14,8 +14,8 @@ func (c *Client) Ping() (Ping, error) {
 // Simple
 //
 
-func (c *Client) SimpleSupportedVsCurrencies() ([]Currency, error) {
-	var scs []Currency
+func (c *Client) SimpleSupportedVsCurrencies() ([]string, error) {
+	var scs []string
 	err := c.do(fmt.Sprintf("%s/simple/supported_vs_currencies", baseURL), nil, &scs)
 	return scs, err
 }

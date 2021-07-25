@@ -11,7 +11,7 @@ import (
 
 func TestSimplePrices(t *testing.T) {
 	var sps SimplePrices
-	sps.vsCurrencies = []Currency{"usd", "aud"}
+	sps.vsCurrencies = []string{"usd", "aud"}
 	err := unmarshalModel("simple_price", &sps)
 	assert.NoError(t, err)
 	assert.Equal(t, 2, len(sps.Prices))
@@ -36,12 +36,12 @@ func TestMarkets(t *testing.T) {
 	assert.Equal(t, 2, len(ms))
 	eth := ms[0]
 	usdt := ms[1]
-	assert.Equal(t, ID("ethereum"), eth.Id)
-	assert.Equal(t, ID("tether"), usdt.Id)
+	assert.Equal(t, "ethereum", eth.Id)
+	assert.Equal(t, "tether", usdt.Id)
 	assert.Nil(t, usdt.SparklineIn7D)
 	assert.Nil(t, usdt.PriceChangePercentage1HInCurrency)
 	assert.Nil(t, usdt.Roi)
-	assert.Equal(t, Currency("btc"), eth.Roi.Currency)
+	assert.Equal(t, "btc", eth.Roi.Currency)
 	assert.Equal(t, 168, len(eth.SparklineIn7D.Price))
 	assert.Equal(t, time.Date(2015, 3, 2, 0, 0, 0, 0, time.UTC), usdt.AtlDate)
 }

@@ -4,7 +4,6 @@ import (
 	"errors"
 	"strconv"
 	"strings"
-	"unsafe"
 )
 
 var MissingParameterError = errors.New("missing parameter")
@@ -23,8 +22,8 @@ func (c CoinsParams) toQuery() (map[string]string, error) {
 }
 
 type SimplePriceParams struct {
-	Ids                  []ID       // required
-	VsCurrencies         []Currency // required
+	Ids                  []string // required
+	VsCurrencies         []string // required
 	IncludeMarketCap     bool
 	Include24hrVol       bool
 	Include24hrChange    bool
@@ -36,8 +35,8 @@ func (p SimplePriceParams) toQuery() (map[string]string, error) {
 		return nil, MissingParameterError
 	}
 	return map[string]string{
-		"ids":                     strings.Join(*(*[]string)(unsafe.Pointer(&p.Ids)), ","),
-		"vs_currencies":           strings.Join(*(*[]string)(unsafe.Pointer(&p.VsCurrencies)), ","),
+		"ids":                     strings.Join(p.Ids, ","),
+		"vs_currencies":           strings.Join(p.VsCurrencies, ","),
 		"include_market_cap":      strconv.FormatBool(p.IncludeMarketCap),
 		"include_24hr_vol":        strconv.FormatBool(p.Include24hrVol),
 		"include_24hr_change":     strconv.FormatBool(p.Include24hrChange),
@@ -47,8 +46,8 @@ func (p SimplePriceParams) toQuery() (map[string]string, error) {
 }
 
 type CoinsMarketsParams struct {
-	VsCurrency            Currency // required usd, eur, jpy, etc
-	Ids                   []ID
+	VsCurrency            string // required usd, eur, jpy, etc
+	Ids                   []string
 	Category              string // decentralized_finance_defi, stablecoins
 	Order                 string // gecko_desc, gecko_asc, market_cap_asc, market_cap_desc, volume_asc, volume_desc, id_asc, id_desc
 	PerPage               int    // max 250
@@ -71,7 +70,7 @@ func (c CoinsMarketsParams) toQuery() (map[string]string, error) {
 	}
 	if c.Ids != nil {
 		if len(c.Ids) > 0 {
-			q["ids"] = strings.Join(*(*[]string)(unsafe.Pointer(&c.Ids)), ",")
+			q["ids"] = strings.Join(c.Ids, ",")
 		}
 	}
 	if len(c.Order) > 0 {
@@ -91,7 +90,7 @@ func (c CoinsMarketsParams) toQuery() (map[string]string, error) {
 }
 
 type CoinsDataParams struct {
-	Id ID
+	Id string
 	//Localization  bool
 	//Tickers       bool
 	//MarketData    bool
@@ -115,9 +114,9 @@ func (c CoinsDataParams) toQuery() (map[string]string, error) {
 }
 
 type CoinsChartsParams struct {
-	Id         ID       // required
-	VsCurrency Currency // required
-	Days       string   // required (eg. 1,14,30,max) 5min interval 1 day, 1h interval 1-90days, 1d interval 90+days
+	Id         string // required
+	VsCurrency string // required
+	Days       string // required (eg. 1,14,30,max) 5min interval 1 day, 1h interval 1-90days, 1d interval 90+days
 }
 
 func (c CoinsChartsParams) toQuery() (map[string]string, error) {
@@ -131,9 +130,9 @@ func (c CoinsChartsParams) toQuery() (map[string]string, error) {
 }
 
 type CoinsOHLCParams struct {
-	Id         ID       // required
-	VsCurrency Currency // required
-	Days       string   // required 1/7/14/30/90/180/365/max, intervals: 1-2d:30m, 3-30d:4h, 31+d:4d
+	Id         string // required
+	VsCurrency string // required
+	Days       string // required 1/7/14/30/90/180/365/max, intervals: 1-2d:30m, 3-30d:4h, 31+d:4d
 }
 
 func (c CoinsOHLCParams) toQuery() (map[string]string, error) {

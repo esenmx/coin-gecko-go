@@ -45,7 +45,7 @@ func (c *Client) do(url string, params QueryParams, ptr interface{}) error {
 
 type api interface {
 	Ping() (Ping, error)
-	SimpleSupportedVsCurrencies() ([]Currency, error)
+	SimpleSupportedVsCurrencies() ([]string, error)
 	SimplePrice(SimplePriceParams) (SimplePrices, error)
 	CoinsList(CoinsParams) ([]Coin, error)
 	CoinsMarkets(CoinsMarketsParams) ([]Market, error)

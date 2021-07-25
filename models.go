@@ -10,11 +10,8 @@ type Ping struct {
 	GeckoSays string `json:"gecko_says"`
 }
 
-type ID string
-type EID string // Exchange ID
-type Currency string
 type Coin struct {
-	Id     ID     `json:"id"`
+	Id     string `json:"id"`
 	Symbol string `json:"symbol"`
 	Name   string `json:"name"`
 }
@@ -39,13 +36,13 @@ type Price struct {
 }
 
 type SimplePrice struct {
-	CurrencyPrice map[Currency]Price
+	CurrencyPrice map[string]Price
 	LastUpdatedAt *int64
 }
 
 type SimplePrices struct {
-	vsCurrencies []Currency
-	Prices       map[ID]SimplePrice
+	vsCurrencies []string
+	Prices       map[string]SimplePrice
 }
 
 func (r *SimplePrices) UnmarshalJSON(bs []byte) error {
@@ -57,10 +54,10 @@ func (r *SimplePrices) UnmarshalJSON(bs []byte) error {
 	if err != nil {
 		return err
 	}
-	r.Prices = make(map[ID]SimplePrice, len(data))
+	r.Prices = make(map[string]SimplePrice, len(data))
 	for k, v := range data {
 		lu := int64(v["last_updated_at"])
-		ps := SimplePrice{LastUpdatedAt: &lu, CurrencyPrice: make(map[Currency]Price, len(r.vsCurrencies))}
+		ps := SimplePrice{LastUpdatedAt: &lu, CurrencyPrice: make(map[string]Price, len(r.vsCurrencies))}
 		for _, vsc := range r.vsCurrencies {
 			parser := func(k string) *float64 {
 				if p, ok := v[fmt.Sprintf("%s_%s", vsc, k)]; ok {
@@ -76,7 +73,7 @@ func (r *SimplePrices) UnmarshalJSON(bs []byte) error {
 				Change24h: parser("24h_change"),
 			}
 		}
-		r.Prices[ID(k)] = ps
+		r.Prices[string(k)] = ps
 	}
 	return nil
 }
@@ -95,7 +92,7 @@ type Description string
 type Platforms map[string]string
 type Project struct {
 	Type   string `json:"type"`
-	Id     ID     `json:"id"`
+	Id     string `json:"id"`
 	Name   string `json:"name"`
 	Symbol string `json:"symbol"`
 	Image  Image  `json:"image"`
@@ -159,9 +156,9 @@ func (r *Platforms) UnmarshalJSON(bs []byte) error {
 }
 
 type ROI struct {
-	Times      float64  `json:"times"`
-	Currency   Currency `json:"currency"`
-	Percentage float64  `json:"percentage"`
+	Times      float64 `json:"times"`
+	Currency   string  `json:"currency"`
+	Percentage float64 `json:"percentage"`
 }
 type SparklineIn7D struct {
 	Price []float64 `json:"price"`
@@ -208,7 +205,7 @@ type Charts struct {
 type OHLC [][5]float64
 
 type ExchangeList []struct {
-	Id   EID    `json:"id"`
+	Id   string `json:"id"`
 	Name string `json:"name"`
 }
 

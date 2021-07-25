@@ -23,8 +23,8 @@ func TestClient_SupportedVsCurrencies(t *testing.T) {
 
 func TestClient_SimplePrice(t *testing.T) {
 	res, err := client.SimplePrice(SimplePriceParams{
-		Ids:          []ID{"polkadot", "solana", "chainlink", "kusama"},
-		VsCurrencies: []Currency{"usd", "aud"},
+		Ids:          []string{"polkadot", "solana", "chainlink", "kusama"},
+		VsCurrencies: []string{"usd", "aud"},
 	})
 	assert.NoError(t, err)
 	assert.Equal(t, 4, len(res.Prices))
@@ -74,7 +74,7 @@ func TestClient_CoinsMarkets(t *testing.T) {
 		}
 	})
 	t.Run("Ids", func(t *testing.T) {
-		ms, err := client.CoinsMarkets(CoinsMarketsParams{VsCurrency: "usd", Ids: []ID{"polkadot", "solana"}})
+		ms, err := client.CoinsMarkets(CoinsMarketsParams{VsCurrency: "usd", Ids: []string{"polkadot", "solana"}})
 		assert.NoError(t, err)
 		assert.Equal(t, 2, len(ms))
 	})
