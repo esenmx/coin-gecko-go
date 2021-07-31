@@ -49,11 +49,13 @@ type api interface {
 	SimplePrice(SimplePriceParams) (SimplePrices, error)
 	CoinsList(CoinsParams) ([]Coin, error)
 	CoinsMarkets(CoinsMarketsParams) ([]Market, error)
-	CoinsData(CoinsDataParams) (CoinData, error)
-	CoinsCharts(CoinsChartsParams) (Charts, error)
+	CoinsID(CoinsDataParams) (CoinData, error)
+	CoinsMarketCharts(CoinsChartsParams) (Charts, error)
 	CoinsOHLC(CoinsOHLCParams) (OHLC, error)
 	ExchangesList() (ExchangeList, error)
 	Exchanges(params ExchangesParams) ([]Exchange, error)
 }
 
-var _ api = (*Client)(nil)
+func assertApiInterface() {
+	var _ api = (*Client)(nil)
+}

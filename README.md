@@ -9,7 +9,6 @@ implement only the requests I need for my apps, but you can open `issue` for un-
 - Required parameters handled before the requests
 - Messy payloads simplified, not well organized fields omitted(see also `/coins/{id}`), open `issue` for your needs
 - `Nullable` fields have pointer types
-- `Localization` is not supported
 
 ## Progress Tracker
 

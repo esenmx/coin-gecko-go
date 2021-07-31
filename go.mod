@@ -1,4 +1,4 @@
-module github.com/softronaut/gocko
+module github.com/esenmx/gocko
 
 go 1.16
 

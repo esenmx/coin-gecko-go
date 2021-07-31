@@ -45,13 +45,13 @@ func (c *Client) CoinsMarkets(p CoinsMarketsParams) ([]Market, error) {
 	return ms, err
 }
 
-func (c *Client) CoinsData(p CoinsDataParams) (CoinData, error) {
+func (c *Client) CoinsID(p CoinsDataParams) (CoinData, error) {
 	var cd CoinData
 	err := c.do(fmt.Sprintf("%s/coins/%s", baseURL, p.Id), p, &cd)
 	return cd, err
 }
 
-func (c *Client) CoinsCharts(p CoinsChartsParams) (Charts, error) {
+func (c *Client) CoinsMarketCharts(p CoinsChartsParams) (Charts, error) {
 	var ccs Charts
 	err := c.do(fmt.Sprintf("%s/coins/%s/market_chart", baseURL, p.Id), p, &ccs)
 	return ccs, err
