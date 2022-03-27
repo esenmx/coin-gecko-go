@@ -1,9 +1,6 @@
-# Gocko (Golang Client for [CoinGecko](https://coingecko.com/))
+# coingecko-go
 
-I create this package for my personal projects, and it aims to be simple and extensible with minor tweaks. I'll
-implement only the requests I need for my apps, but you can open `issue` for un-implemented methods also!
-
-### Notes:
+Golang Client for [CoinGecko](https://coingecko.com/)
 
 - Dependency-Free
 - Required parameters handled before the requests
