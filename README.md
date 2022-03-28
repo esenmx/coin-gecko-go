@@ -77,12 +77,6 @@ Golang Client for [CoinGecko](https://coingecko.com/)
 
 - [ ] status_updates
 
-### Events
-
-- [ ] events
-- [ ] events/countries
-- [ ] events/types
-
 ### Exchange Trades
 
 - [ ] exchange_rates

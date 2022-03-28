@@ -11,16 +11,20 @@ type Client struct {
 	httpClient *http.Client
 }
 
-func DefaultClient() *Client {
-	return &Client{httpClient: http.DefaultClient}
-}
+type Option func(*Client)
 
-// CustomClient you may consider using: https://github.com/hashicorp/go-retryablehttp
-func CustomClient(client *http.Client) *Client {
-	return &Client{httpClient: client}
+func NewClient(options ...Option) *Client {
+	c := &Client{
+		httpClient: http.DefaultClient,
+	}
+	for _, option := range options {
+		option(c)
+	}
+	return c
 }
+func WithHttpClient(hc *http.Client) Option { return func(c *Client) { c.httpClient = hc } }
 
-func (c *Client) do(url string, params QueryParams, ptr interface{}) error {
+func (c *Client) Do(url string, params QueryParams, ptr interface{}) error {
 	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
 		return err
@@ -43,7 +47,7 @@ func (c *Client) do(url string, params QueryParams, ptr interface{}) error {
 	return json.NewDecoder(res.Body).Decode(ptr)
 }
 
-type api interface {
+type Api interface {
 	Ping() (Ping, error)
 	SimpleSupportedVsCurrencies() ([]string, error)
 	SimplePrice(SimplePriceParams) (SimplePrices, error)
@@ -57,5 +61,5 @@ type api interface {
 }
 
 func assertApiInterface() {
-	var _ api = (*Client)(nil)
+	var _ Api = (*Client)(nil)
 }
