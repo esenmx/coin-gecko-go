@@ -65,7 +65,7 @@ func (r *SimplePrices) UnmarshalJSON(bs []byte) error {
 				}
 				return nil
 			}
-			price := v[string(vsc)]
+			price := v[vsc]
 			ps.CurrencyPrice[vsc] = Price{
 				Price:     price,
 				MarketCap: parser("market_cap"),
@@ -73,7 +73,7 @@ func (r *SimplePrices) UnmarshalJSON(bs []byte) error {
 				Change24h: parser("24h_change"),
 			}
 		}
-		r.Prices[string(k)] = ps
+		r.Prices[k] = ps
 	}
 	return nil
 }

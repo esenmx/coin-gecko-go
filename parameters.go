@@ -64,7 +64,7 @@ func (c CoinsMarketsParams) toQuery() (map[string]string, error) {
 		return nil, InvalidParameterError
 	}
 	q := map[string]string{}
-	q["vs_currency"] = string(c.VsCurrency)
+	q["vs_currency"] = c.VsCurrency
 	if len(c.Category) > 0 {
 		q["category"] = c.Category
 	}
@@ -124,7 +124,7 @@ func (c CoinsChartsParams) toQuery() (map[string]string, error) {
 		return nil, MissingParameterError
 	}
 	return map[string]string{
-		"vs_currency": string(c.VsCurrency),
+		"vs_currency": c.VsCurrency,
 		"days":        c.Days,
 	}, nil
 }
@@ -140,7 +140,7 @@ func (c CoinsOHLCParams) toQuery() (map[string]string, error) {
 		return nil, MissingParameterError
 	}
 	return map[string]string{
-		"vs_currency": string(c.VsCurrency),
+		"vs_currency": c.VsCurrency,
 		"days":        c.Days,
 	}, nil
 }

@@ -90,9 +90,9 @@ func TestClient_CoinsCharts(t *testing.T) {
 	t.Run("Minutely", func(t *testing.T) {
 		ccs, err := client.CoinsMarketCharts(CoinsChartsParams{Id: "polkadot", VsCurrency: "usd", Days: "1"})
 		require.NoError(t, err)
-		require.Equal(t, 12*24, len(ccs.Prices))
-		require.Equal(t, 12*24, len(ccs.TotalVolumes))
-		require.Equal(t, 12*24, len(ccs.MarketCaps))
+		require.Equal(t, 12*24+1, len(ccs.Prices))
+		require.Equal(t, 12*24+1, len(ccs.TotalVolumes))
+		require.Equal(t, 12*24+1, len(ccs.MarketCaps))
 		tsIntegrity(ccs)
 	})
 	t.Run("Hourly", func(t *testing.T) {
